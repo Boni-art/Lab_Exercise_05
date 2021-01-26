@@ -1,3 +1,21 @@
+const reloadIcon = document.querySelector('.fa');   
+
+// Event Listener for reload 
+reloadIcon.addEventListener('click', reloadPage);
+
+
+// Reload Page Function 
+function reloadPage() {
+    
+    location.reload();
+}
+
+
+
+
+
+
+
 /*  
 Here is the exercise on working on the remaining bom method 
 
