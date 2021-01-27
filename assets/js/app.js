@@ -10,8 +10,17 @@ const taskList = document.querySelector('.collection');          //The ul
 
 const clearBtn = document.querySelector('.clear-tasks'); 
 
+const ascendButton = document.querySelector('#ascending');
 
+const descendButton = document.querySelector('#descending');
 
+var sortCheck = 1;
+
+var backEndList = document.createElement('ul');
+
+ascendButton.addEventListener('click', ascend);
+
+descendButton.addEventListener('click', descend);
 
 // form submit 
 form.addEventListener('submit', addNewTask);
@@ -36,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (taskInput.value === ''){
         taskInput.style.borderColor = "red";
-        return;
     } else{
         const li = document.createElement('li');
         li.className = 'collection-item';
@@ -44,9 +52,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const link = document.createElement('a');
         link.innerHTML = '<i class="fa fa-remove"></i>';
         link.className = 'delete-item secondary-content';
-        li.appendChild(link);
-        taskList.appendChild(li);
+        li.append(link);
+        if (sortCheck == 1) {
+            taskList.append(li);
+        } else {
+            taskList.prepend(li);
+        }
+        taskInput.value = '';
     }
+    
 
 
 
@@ -68,10 +82,11 @@ function removeTask(e) {
 
 // Clear Task Function definition 
 function clearAllTasks() {
-    const toBeSearched = document.querySelectorAll(".collection-item");
-    for (let i = 0; i < toBeSearched.length; i++){
-        toBeSearched[i].style.display = "none";
-    }
+    // const toBeSearched = document.querySelectorAll(".collection-item");
+    // for (let i = 0; i < toBeSearched.length; i++){
+    //     toBeSearched[i].style.display = "none";
+    // }
+    taskList.innerHTML = '';
 }
 // Filter tasks function definition 
 function filterTasks(e) {
@@ -93,19 +108,39 @@ function filterTasks(e) {
         }        
     }
 }    
-//     toBeSearched.forEach(function search(element) {
-        
-//     });
-//     // (element, searchContent) => {
-//     //     if (toBeSearched.indexOf(searchContent) != -1) {
-//     //         element.style.display = 'block';
-//     //         alert("present");
-//     //     } else {
-//     //         element.style.display = "none";
-//     //         alert("not present");
-//     //     }
-//     // });
-// }
 
+
+function ascend(){
+    taskList.innerHTML = '';
+    const toBeSearched = document.querySelectorAll(".collection-item");
+    for (let i = 0; i < toBeSearched.length; i++) {
+        const element = toBeSearched[i];
+        taskList.prepend(element);
+    }   
+
+    // taskList.innerHTML = '';
+    // for (let i = 0; i < backEndList.length; i++) {
+    //     taskList.append(backEndList[i]);
+    //     alert(backEndList[i]);
+    // }
+    // // backEndList.forEach(element => {
+    // //     taskList.append(element);
+    // //     console.log(element);
+    // // });
+    sortCheck = 1;
+}
+
+
+
+function descend() {
+    taskList.innerHTML = '';
+    const toBeSearched = document.querySelectorAll(".collection-item");
+    for (let i = 0; i < toBeSearched.length; i++) {
+
+        taskList.prepend(toBeSearched[i]);
+    }
+
+    sortCheck = 2;
+}
 
  
