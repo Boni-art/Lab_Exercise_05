@@ -11,6 +11,8 @@ const taskList = document.querySelector('.collection');          //The ul
 const clearBtn = document.querySelector('.clear-tasks'); 
 
 
+
+
 // form submit 
 form.addEventListener('submit', addNewTask);
 
@@ -22,7 +24,11 @@ filter.addEventListener('keyup', filterTasks);
 
 taskList.addEventListener('click', removeTask);
 
-
+document.addEventListener('DOMContentLoaded', function() {
+    $('.dropdown-trigger').dropdown();
+    // var elems = document.querySelectorAll('.dropdown-trigger');
+    // var instances = M.Dropdown.init(elems, options);
+});
 
 
  // Add New  Task Function definition 
@@ -62,15 +68,44 @@ function removeTask(e) {
 
 // Clear Task Function definition 
 function clearAllTasks() {
-
-    alert("Clear tasks ....");
-
+    const toBeSearched = document.querySelectorAll(".collection-item");
+    for (let i = 0; i < toBeSearched.length; i++){
+        toBeSearched[i].style.display = "none";
+    }
 }
 // Filter tasks function definition 
 function filterTasks(e) {
 
-    console.log("Task Filter ...");
+    let searchContent = filter.value.toUpperCase();
+    const toBeSearched = document.querySelectorAll(".collection-item");
 
-}
+    for (let i = 0; i < toBeSearched.length; i++) {
+        if (toBeSearched[i].textContent.toUpperCase() == searchContent) {
+            toBeSearched[i].style.display = "block";
+        }
+        if (toBeSearched[i].textContent.toUpperCase() != searchContent) {
+            toBeSearched[i].style.display = "none";
+        }
+        if (searchContent == "") {
+            for (let i = 0; i < toBeSearched.length; i++){
+                toBeSearched[i].style.display = "block";
+            }
+        }        
+    }
+}    
+//     toBeSearched.forEach(function search(element) {
+        
+//     });
+//     // (element, searchContent) => {
+//     //     if (toBeSearched.indexOf(searchContent) != -1) {
+//     //         element.style.display = 'block';
+//     //         alert("present");
+//     //     } else {
+//     //         element.style.display = "none";
+//     //         alert("not present");
+//     //     }
+//     // });
+// }
+
 
  
