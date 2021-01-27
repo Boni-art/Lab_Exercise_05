@@ -111,12 +111,33 @@ function filterTasks(e) {
 
 
 function ascend(){
-    taskList.innerHTML = '';
-    const toBeSearched = document.querySelectorAll(".collection-item");
-    for (let i = 0; i < toBeSearched.length; i++) {
-        const element = toBeSearched[i];
-        taskList.prepend(element);
-    }   
+
+    if (sortCheck == 1) {
+        return;
+    } else {
+        console.log('sorting...')
+        var items, arr, taskValue;
+        items = document.querySelectorAll('.collection-item');
+        arr = new Array();
+        //looping through the list items, and hiding unmatching results
+        for(let i = items.length-1; i>=0; i--){
+            taskValue = items[i].textContent || items[i].innerText;
+            arr.push(taskValue);
+            console.log(arr[i]);
+        }
+        
+        items.forEach(function(element, index){
+            element.innerText = arr[index];
+        });
+        sortCheck = 1;
+    }
+
+    
+    // const toBeSearched = document.querySelectorAll(".collection-item");
+    // for (let i = 0; i < toBeSearched.length; i++) {
+    //     const element = toBeSearched[i];
+    //     taskList.prepend(element);
+    // }   
 
     // taskList.innerHTML = '';
     // for (let i = 0; i < backEndList.length; i++) {
@@ -127,20 +148,53 @@ function ascend(){
     // //     taskList.append(element);
     // //     console.log(element);
     // // });
-    sortCheck = 1;
+    
 }
 
 
 
 function descend() {
-    taskList.innerHTML = '';
-    const toBeSearched = document.querySelectorAll(".collection-item");
-    for (let i = 0; i < toBeSearched.length; i++) {
+    if (sortCheck == 2) {
+        return;
+    } else {
+        console.log('sorting...')
+        var items, arr, taskValue;
+        items = document.querySelectorAll('.collection-item');
+        arr = new Array();
+        //looping through the list items, and hiding unmatching results
+        for(let i = items.length-1; i>=0; i--){
+            taskValue = items[i].textContent || items[i].innerText;
+            arr.push(taskValue);
+            console.log(arr[i]);
+        }
+        
+        items.forEach(function(element, index){
+            element.innerText = arr[index];
+        });
 
-        taskList.prepend(toBeSearched[i]);
+        sortCheck = 2;
     }
-
-    sortCheck = 2;
+    
 }
 
  
+
+
+
+// function sortTask(e){
+//     console.log('sorting...')
+//     var items, arr, taskValue;
+//     items = document.querySelectorAll('.collection-item');
+//     arr = new Array();
+//     //looping through the list items, and hiding unmatching results
+//     for(let i = items.length-1; i>=0; i--){
+//         taskValue = items[i].textContent || items[i].innerText;
+//         arr.push(taskValue);
+//         console.log(arr[i]);
+//     }
+    
+//     items.forEach(function(element, index){
+//         element.innerText = arr[index];
+//     });
+// }
+
